@@ -18,6 +18,9 @@ router.get("/pagination", userController.paginationData)
 router.post('/api/createCompanyDetails', companyController.createCompanyDetails)
 router.put('/api/editCompanyDetails/:id', companyController.editCompanyDetails)
 router.get('/api/getCompanyDetails/:id', companyController.getCompanyDetails)
+router.get('/api/getCompanyDetailslist', companyController.getCompanyDetailsList)
+router.get('/api/deleteCompanyDetails/:id', companyController.deleteCompanyDetails)
+
 
 
 module.exports = router;

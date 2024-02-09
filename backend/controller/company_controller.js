@@ -76,3 +76,42 @@ exports.editCompanyDetails = async (req, res) => {
       console.log(err.message)
     }
   }
+
+
+  exports.getCompanyDetailsList = async (req, res) => {
+    try {
+      console.log(req.params.id)
+      const restData = await CompanyDetail.find({})
+      console.log("restData", restData)
+      if (!restData || restData == undefined) {
+        return res.send("not found restaurant")
+      }
+      return res.status(200).send({
+        message: "user resitered save data",
+        data: restData
+      })
+    }
+    catch (err) {
+      console.log(err.message)
+    }
+  }
+
+
+
+
+exports.deleteCompanyDetails = async (req, res) => {
+  try {
+
+    const userdata = await CompanyDetail.find({ _id: req.params.id });
+    if (userdata) {
+      const updateData = await CompanyDetail.findByIdAndRemove({ _id: req.params.id }, {
+        $set: req.body
+      })
+      console.log("updateData", updateData)
+      return res.send({ status: "Delete data successfully! " })
+    }
+  }
+  catch (err) {
+    console.log(err.message)
+  }
+}

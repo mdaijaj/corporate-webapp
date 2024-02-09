@@ -29,7 +29,7 @@ export const allModuleList=[
         {
             "module_name": "Personal Details",
             "icon": "fa fa-fw fa-wrench",
-            "path": "/admin_setting"
+            "path": "/personal_details"
         }
      ]	
 },
@@ -43,12 +43,12 @@ export const allModuleList=[
         },
         {
             "module_name": "Address Details",
-            "icon": "envelope",
-            "path": "/address_details"
+            "icon": "home",
+            "path": "/company_address_details"
          },
         {
             "module_name": "Contact Person Details",
-            "icon": "envelope",
+            "icon": "user",
             "path": "/contact_person_details"
         },
         {

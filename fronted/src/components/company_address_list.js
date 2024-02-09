@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -9,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const UserDetails = () => {
+const AddressDetailsList = () => {
     const [achievementList, setAchievementList] = useState([])
     const [open, setOpen] = useState(false);
     const [achievedetail, setAchievedetail] = useState('');
@@ -32,7 +33,7 @@ const UserDetails = () => {
 
 
     const handleOpen = async (id) => {
-        const response = await axios.get(`/api/getUserDetails/${id}`)
+        const response = await axios.get(`/api/getCompanyDetails/${id}`)
         setOpen(true);
         let result = await response.data.data
         setAchievedetail(result)
@@ -41,20 +42,21 @@ const UserDetails = () => {
     const handleClose = () => setOpen(false);
 
     const UserList = async () => {
-        const response = await axios.get('/api/getuserList');
+        const response = await axios.get('/api/getCompanyDetailslist');
         let filterData = await response.data.data
         setAchievementList(filterData)
     }
 
     const deleteAchievement = async (id) => {
-        await fetch(`/api/deleteUserDetails/${id}`);
+        await fetch(`/api/deleteCompanyDetails/${id}`);
         toast.warning('delete successfully', { autoClose: 2000 })
         UserList()
     }
 
     const updateAchievementDetails = async (itemId) => {
-        navigate(`/user_details_update/:${itemId}`)
+        navigate(`/company_address_details/:${itemId}`)
     }
+
 
 
     //pagination
@@ -134,17 +136,14 @@ const UserDetails = () => {
                     <thead>
                         <tr>
                             <th scope="col">#Id</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Mobile</th>
-                            <th scope="col">Email</th>
+                            <th scope="col">AddressLine1</th>
+                            <th scope="col">AddressLine2</th>
+                            <th scope="col">District</th>
                             <th scope="col">City</th>
                             <th scope="col">State</th>
                             <th scope="col">Pincode</th>
-                            <th scope="col">Pan Number</th>
-                            <th scope="col">Vehicle Number</th>
-                            <th scope="col">Role Name</th>
-
+                            {/* <th scope="col">PAN Number</th>
+                            <th scope="col">Vehicle Number</th> */}
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -152,22 +151,19 @@ const UserDetails = () => {
                     <tbody>
                         {
                             results.length>0?results.map((item, index) => {
-                                {console.log("item", item)}
+                                {console.log("kkkkkkkkkkkkk", item)}
                                 return (
                                     <tr key={index}>
                                         <th scope="row">{index + 1}</th>
+                                        <td>{item.first_name}</td>
                                         <td>{item.first_name}</td>
                                         <td>{item.last_name}</td>
                                         <td>{item.mobile}</td>
                                         <td>{item.email}</td>
                                         <td>{item.city}</td>
-                                        <td>{item.state}</td>
-                                        <td>{item.pincode}</td>
-                                        <td>{item.panNumber}</td>
-                                        <td>{item.vehicleNumber}</td>
-                                        <td>{item.role_name}</td>
+
                                         <td >
-                                            <Link className="btn btn-outline-primary mr-2" style={{ margin: "5px" }} onClick={() => updateAchievementDetails(item._id)} to={`/user_details_update/${item._id}`}><i class="fas fa-user-edit"></i>
+                                            <Link className="btn btn-outline-primary mr-2" style={{ margin: "5px" }} onClick={() => updateAchievementDetails(item._id)} to={`/company_address_details/${item._id}`}><i class="fas fa-user-edit"></i>
                                                 <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
                                             </Link>
                                             <Link className="btn btn-danger mr-2" style={{ margin: "5px" }} onClick={() => deleteAchievement(item._id)}><i class="fas fa-trash"></i>
@@ -187,19 +183,14 @@ const UserDetails = () => {
                                     return (
                                         <tr key={index}>
                                             <th scope="row">{index + 1}</th>
-                                            <td>{item.first_name}</td>
-                                            <td>{item.last_name}</td>
-                                            <td>{item.mobile}</td>
-                                            <td>{item.email}</td>
+                                            <td>{item.addressline1}</td>
+                                            <td>{item.addressline2}</td>
+                                            <td>{item.district}</td>
                                             <td>{item.city}</td>
                                             <td>{item.state}</td>
                                             <td>{item.pincode}</td>
-                                            <td>{item.panNumber}</td>
-                                            <td>{item.vehicleNumber}</td>
-                                            <td>{item.role_name}</td>
-
                                             <td >
-                                                <Link className="btn btn-outline-primary mr-2" style={{ margin: "5px" }} onClick={() => updateAchievementDetails(item._id)} to={`/user_details_update/${item._id}`}><i class="fas fa-user-edit"></i>
+                                                <Link className="btn btn-outline-primary mr-2" style={{ margin: "5px" }} onClick={() => updateAchievementDetails(item._id)} to={`/company_address_details/${item._id}`}><i class="fas fa-user-edit"></i>
                                                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
                                                 </Link>
                                                 <Link className="btn btn-danger mr-2" style={{ margin: "5px" }} onClick={() => deleteAchievement(item._id)}><i class="fas fa-trash"></i>
@@ -255,12 +246,15 @@ const UserDetails = () => {
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2" style={{ backgroundColor: "blue" }}>Achievement Details</Typography>
                     <Typography id="modal-modal-description">
+            
                         {`
                         Id       :  ${achievedetail._id} 
-                        name     :  ${achievedetail.name}
-                        email    :  ${achievedetail.email}
-                        mobile :  ${achievedetail.mobile}
-                        status   :  ${achievedetail.status}
+                        addressline1     :  ${achievedetail.addressline1}
+                        addressline2    :  ${achievedetail.addressline2}
+                        district :  ${achievedetail.district}
+                        city   :  ${achievedetail.city}
+                        state :  ${achievedetail.state}
+                        pincode   :  ${achievedetail.pincode}
                         `}
                     </Typography>
                 </Box>
@@ -269,4 +263,4 @@ const UserDetails = () => {
     )
 }
 
-export default UserDetails;
+export default AddressDetailsList;

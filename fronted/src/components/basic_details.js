@@ -23,6 +23,7 @@ const BasicDetails=()=>{
             email,
             mobile,
             role_name,
+            password
             
         } = agentdata;
         console.log("submit button calling....")
@@ -37,7 +38,8 @@ const BasicDetails=()=>{
                 last_name,
                 email,
                 mobile,
-                role_name
+                role_name,
+                password
             })
         }
 
@@ -105,15 +107,16 @@ const BasicDetails=()=>{
                     </div>
                 </div>
                 <div className="mb-4 row">
+                    
                     <div className="col-6 sm-4">
-                        <label for="formGroupExampleInput" class="form-label">Role Select *</label>
-                        <select className="form-control" id="inputGroupSelect01" onChange={handleInput} name="role_name" aria-label="select example">
-                            <option selected>Select Role</option>
-                            <option value="Individual">Individual</option>
-                            <option value="Corporate">Corporate</option>
-
-                        </select>
-                    </div>  
+                    <label for="formGroupExampleInput" class="form-label">Password</label>
+                        <input type="password"
+                            className="form-control"
+                            name="password"
+                            onChange={handleInput}
+                            id="password"
+                            placeholder="password" />
+                    </div>
                     <div className="col-6 sm-4">
                     <label for="formGroupExampleInput" class="form-label">Birth Date </label>
                         <input type=""
@@ -123,6 +126,15 @@ const BasicDetails=()=>{
                             id="birth_Date"
                             placeholder="date of birth" />
                     </div>
+                    <div className="col-6 sm-4">
+                        <label for="formGroupExampleInput" class="form-label">Role Select *</label>
+                        <select className="form-control" id="inputGroupSelect01" onChange={handleInput} name="role_name" aria-label="select example">
+                            <option selected>Select Role</option>
+                            <option value="Individual">Individual</option>
+                            <option value="Corporate">Corporate</option>
+
+                        </select>
+                    </div>  
                 </div>
 
                 <div className="mb-2 row">

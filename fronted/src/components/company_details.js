@@ -76,7 +76,9 @@ const CompanyDetails=()=>{
                             placeholder="companyTIN" />
                     </div>
                 </div>
+                
                 <div className="mb-4 row">
+                
                     <div className="col-6 sm-4">
                         <label for="formGroupExampleInput" class="form-label">Company Type </label>
                         <select className="form-control" id="inputGroupSelect01" onChange={handleInput} name="companyType" aria-label="select example">

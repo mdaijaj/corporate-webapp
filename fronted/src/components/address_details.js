@@ -1,7 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const AddressDetails=()=>{
 
@@ -57,6 +57,18 @@ const AddressDetails=()=>{
         }
 
     }
+
+    const getdetails= async()=>{
+        const res = await fetch(`/api/getUserDetails/${id}`);
+        const result = await res.json()
+        console.log("result", result)
+        setAgentdata(result.data)
+    }
+
+    useEffect(()=>{
+        getdetails()
+    }, [])
+
     
     
     return (
@@ -69,6 +81,7 @@ const AddressDetails=()=>{
                         <input type="text"
                             className="form-control"
                             id="inputName"
+                            value={agentdata?.addressline1}
                             onChange={handleInput}
                             name='addressline1'
                             placeholder="addressline1" />
@@ -79,6 +92,7 @@ const AddressDetails=()=>{
                             className="form-control"
                             id="inputName"
                             onChange={handleInput}
+                            value={agentdata?.addressline2}
                             name='addressline2'
                             placeholder="addressline2" />
                     </div>
@@ -90,6 +104,7 @@ const AddressDetails=()=>{
                         <input
                             type="text"
                             className="form-control"
+                            value={agentdata?.district}
                             onChange={handleInput}
                             name='district'
                             id="district"
@@ -103,6 +118,7 @@ const AddressDetails=()=>{
                             className="form-control"
                             id="city"
                             onChange={handleInput}
+                            value={agentdata?.city}
                             name='city'
                             placeholder="city*" />
                     </div>
@@ -110,16 +126,16 @@ const AddressDetails=()=>{
                 <div className="mb-4 row">
                     <div className="col-6 sm-4">
                         <label for="formGroupExampleInput" class="form-label">State</label>
-                        <select className="form-control" id="inputGroupSelect01" onChange={handleInput} name="role_name" aria-label="select example">
-                            <option selected>State</option>
-                            <option value="Individual">Delhi</option>
-                            <option value="Corporate">Mahrastra</option>
-                            <option value="Individual">Karnatak</option>
-                            <option value="Corporate">MP</option>
-                            <option value="Individual">UP</option>
-                            <option value="Corporate">Haryana</option>
-                            <option value="Individual">Punjab</option>
-                            <option value="Corporate">Bihar</option>
+                        <select className="form-control" id="inputGroupSelect01" onChange={handleInput} name="state" aria-label="select example">
+                            <option selected>{agentdata?.state}</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Mahrastra">Mahrastra</option>
+                            <option value="Karnatak">Karnatak</option>
+                            <option value="MP">MP</option>
+                            <option value="UP">UP</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Bihar">Bihar</option>
 
                         </select>
                     </div>  
@@ -128,9 +144,10 @@ const AddressDetails=()=>{
                         <input type="number"
                             className="form-control"
                             name="pincode"
+                            value={agentdata?.pincode}
                             onChange={handleInput}
                             id="pincode"
-                            placeholder="date of birth" />
+                            placeholder="Pincode" />
                     </div>
                 </div>
 

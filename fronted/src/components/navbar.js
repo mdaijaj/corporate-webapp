@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import "../App.css"
 
 
-const Navbar = ({islogin}) => {
+const Navbar = ({}) => {
     const navigate = useNavigate()
     const cardata = localStorage.getItem("user")
 
@@ -27,7 +27,7 @@ const Navbar = ({islogin}) => {
                                 <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link active" aria-current="page" to="/agent_data">Company Details</NavLink>
+                                <NavLink className="nav-link active" aria-current="page" to="/company_list">Company Details</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link active" aria-current="page" to="/user_data">User Details</NavLink>
@@ -44,7 +44,7 @@ const Navbar = ({islogin}) => {
                             :
                             <>
                                 <button onClick={handleLogout} className='btn btn-dark'>Logout</button>
-                                {/* <h4 style={{ padding: "40px" }}>{`${JSON.parse(localStorage.getItem('user'))?.first_name} ${JSON.parse(localStorage.getItem('user'))?.last_name}`}</h4> */}
+                                <h4 style={{ padding: "40px" }}>{`${JSON.parse(localStorage.getItem('user'))?.first_name} ${JSON.parse(localStorage.getItem('user'))?.last_name}`}</h4>
                             </>
                         }
                     </div>

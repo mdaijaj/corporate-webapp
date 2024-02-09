@@ -7,24 +7,13 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from 'cdbreact';
-import { NavLink, useFetcher } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Routing from './menubar';
 import {allMenu, allModuleList} from  '../data_store'
 
 
 const Sidebar = ({isLogin}) => {
   const [showdata, setShowdata]= useState([])
-
-  // const userDetails= (userdata)=>{
-  
-  //   if(userdata){
-  //     const filterdata= allModuleList.filter((item)=> item.role==userdata.role_name)
-  //     setShowdata(filterdata)
-  //   }
- 
-  // }
-  
-
 
   useEffect(()=>{
 
@@ -48,9 +37,6 @@ const Sidebar = ({isLogin}) => {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-
-            {/* {console.log("showdata", showdata)} */}
-
             {showdata[0]?.modules?.map((menu, index) => (
               <NavLink exact to={menu.path} activeClassName="activeClicked">
                 <CDBSidebarMenuItem icon={menu.icon}>{menu.module_name}</CDBSidebarMenuItem>
@@ -60,8 +46,6 @@ const Sidebar = ({isLogin}) => {
           </CDBSidebarMenu> 
         </CDBSidebarContent>
       </CDBSidebar>
-
-      {/* manage routing */}
       <Routing/>
     </div>
   );

@@ -4,7 +4,6 @@ import Navbar from "./components/navbar";
 import "./style.css";
 import Sidebar from "./components/sidebar";
 import Routing from "./components/menubar";
-import Header from "./components/header";
 
 const App = () => {
   const [open, setOpen] = useState(false);

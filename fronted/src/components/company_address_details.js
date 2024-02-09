@@ -1,11 +1,11 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const CompanyAddressDetails=()=>{
-
     const [agentdata, setAgentdata] = useState();
+
     const navigate = useNavigate()
     const {id}=useParams()
     console.log("id.........", id)
@@ -14,7 +14,7 @@ const CompanyAddressDetails=()=>{
     const handleInput = (e) => {
         name = e.target.name
         value = e.target.value
-        console.log("agentdata", agentdata)
+        console.log("pppppppppp", agentdata)
         setAgentdata({ ...agentdata, [name]: value })  //[] dynamic data for
     }
 
@@ -47,7 +47,6 @@ const CompanyAddressDetails=()=>{
         const res = await fetch(`/api/editCompanyDetails/${id}`, regInf);
         const result = await res.json()
         console.log("result", result)
-        // localStorage.setItem("user", JSON.stringify(result.data))
         if (result.status === 400 || !result) {
             toast.info('Invalid user details', { autoClose: 1500 })
         }
@@ -55,8 +54,19 @@ const CompanyAddressDetails=()=>{
             toast.success(' update is successfully', { autoClose: 1500 })
             navigate(`/contact_person_details/${result.result._id}`)
         }
-
     }
+
+
+    const getdetails= async()=>{
+        const res = await fetch(`/api/getCompanyDetails/${id}`);
+        const result = await res.json()
+        console.log("result", result)
+        setAgentdata(result.data)
+    }
+
+    useEffect(()=>{
+        getdetails()
+    }, [])
     
     
     return (
@@ -69,8 +79,10 @@ const CompanyAddressDetails=()=>{
                         <input type="text"
                             className="form-control"
                             id="inputName"
-                            onChange={handleInput}
+                            value={agentdata?.addressline1}
+                            // onChange={(e)=> setAgentdata(e.target.value )}
                             name='addressline1'
+                            onChange={handleInput}
                             placeholder="addressline1" />
                     </div>
                     <div className="col-6 sm-4">
@@ -79,6 +91,7 @@ const CompanyAddressDetails=()=>{
                             className="form-control"
                             id="inputName"
                             onChange={handleInput}
+                            value={agentdata?.addressline2}
                             name='addressline2'
                             placeholder="addressline2" />
                     </div>
@@ -91,6 +104,7 @@ const CompanyAddressDetails=()=>{
                             type="text"
                             className="form-control"
                             onChange={handleInput}
+                            value={agentdata?.district}
                             name='district'
                             id="district"
                             placeholder="Enter district..."
@@ -104,22 +118,23 @@ const CompanyAddressDetails=()=>{
                             id="city"
                             onChange={handleInput}
                             name='city'
+                            value={agentdata?.city}
                             placeholder="city*" />
                     </div>
                 </div>
                 <div className="mb-4 row">
                     <div className="col-6 sm-4">
                         <label for="formGroupExampleInput" class="form-label">State</label>
-                        <select className="form-control" id="inputGroupSelect01" onChange={handleInput} name="role_name" aria-label="select example">
-                            <option selected>State</option>
-                            <option value="Individual">Delhi</option>
-                            <option value="Corporate">Mahrastra</option>
-                            <option value="Individual">Karnatak</option>
-                            <option value="Corporate">MP</option>
-                            <option value="Individual">UP</option>
-                            <option value="Corporate">Haryana</option>
-                            <option value="Individual">Punjab</option>
-                            <option value="Corporate">Bihar</option>
+                        <select className="form-control" id="inputGroupSelect01" onChange={handleInput} name="state" aria-label="select example">
+                            <option selected>{agentdata?.state}</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Mahrastra">Mahrastra</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="MP">MP</option>
+                            <option value="UP">UP</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Bihar">Bihar</option>
                         </select>
                     </div>  
                     <div className="col-6 sm-4">
@@ -129,7 +144,8 @@ const CompanyAddressDetails=()=>{
                             name="pincode"
                             onChange={handleInput}
                             id="pincode"
-                            placeholder="date of birth" />
+                            value={agentdata?.pincode}
+                            placeholder="pincode" />
                     </div>
                 </div>
 

@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const ContactPersonDetails=()=>{
@@ -48,10 +48,22 @@ const ContactPersonDetails=()=>{
         }
         else {
             toast.success(' update is successfully', { autoClose: 1000 })
-            navigate('/agent_data')
+            navigate('/company_list')
         }
 
     }
+
+
+    const getdetails= async()=>{
+        const res = await fetch(`/api/getCompanyDetails/${id}`);
+        const result = await res.json()
+        console.log("result", result)
+        setAgentdata(result.data)
+    }
+
+    useEffect(()=>{
+        getdetails()
+    }, [])
     
     
     return (
@@ -64,6 +76,7 @@ const ContactPersonDetails=()=>{
                         <input type="text"
                             className="form-control"
                             id="inputName"
+                            value={agentdata?.contactPersonName}
                             onChange={handleInput}
                             name='contactPersonName'
                             placeholder="contactPersonName" />
@@ -73,6 +86,7 @@ const ContactPersonDetails=()=>{
                         <input type="number"
                             className="form-control"
                             id="inputName"
+                            value={agentdata?.contactPersonMobileNumber}
                             onChange={handleInput}
                             name='contactPersonMobileNumber'
                             placeholder="contactPersonMobileNumber" />
@@ -85,6 +99,7 @@ const ContactPersonDetails=()=>{
                         <input
                             type="text"
                             className="form-control"
+                            value={agentdata?.contactPersonEmail}
                             onChange={handleInput}
                             name='contactPersonEmail'
                             id="contactPersonEmail"
@@ -95,6 +110,7 @@ const ContactPersonDetails=()=>{
                     <label for="formGroupExampleInput" class="form-label">Designation</label>
                         <input type="text"
                             className="form-control"
+                            value={agentdata?.designation}
                             id="designation"
                             onChange={handleInput}
                             name='designation'
