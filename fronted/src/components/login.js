@@ -5,6 +5,11 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
     const [userdata, setUserdata] = useState();
+    const [passdata, setPassdata] = useState();
+    const [userErrors, setUserErrors] = useState(false)
+    const [passErrors, setPassErrors] = useState(false)
+
+
     const navigate = useNavigate()
     let name, value;
 
@@ -12,16 +17,41 @@ const Login = () => {
     const handleInput = (e) => {
         name = e.target.name
         value = e.target.value
+        console.log("uuuuuuuuuuu", value)
+
+        if(value.length<3){
+            setUserErrors(true)   
+        }else{
+            setUserErrors(false)   
+        }
         setUserdata({ ...userdata, [name]: value })  //[] dynamic data for
     }
 
+    const passInput = (e) => {
+        name = e.target.name
+        value = e.target.value
+        console.log("ppppppp", value)
+        if(value.length<3){
+            setPassErrors(true)   
+        }else{
+            setPassErrors(false)   
+        }
+        setPassdata({ ...passdata, [name]: value })  //[] dynamic data for
+    }
+
     const handleSubmit = async (e) => {
-        e.preventDefault();
+
         const {
             email,
             password
         } = userdata;
 
+
+        if(userdata.length<3 || passdata.length<3){
+            toast.success('please correct username or password', { autoClose: 1000 })
+        }
+        e.preventDefault();
+    
         const regInf = {
             method: "Post",
             headers: {
@@ -55,7 +85,6 @@ const Login = () => {
                 <div className="mb-4 row">
                     <div className="col-5 sm-4">
                     <label for="formGroupExampleInput" class="form-label">Email</label>
-
                         <input
                             type="text"
                             className="form-control"
@@ -63,7 +92,8 @@ const Login = () => {
                             name='email'
                             id="email"
                             placeholder="Enter email..."
-                        />
+                        />  
+                        {userErrors?  <span style={{color: "red", fontSize: "20px"}}>Username is not Valid</span> : ""}
                     </div>
                 </div>
                 <div className="mb-4 row">
@@ -73,9 +103,10 @@ const Login = () => {
                         <input type="password"
                             className="form-control"
                             name="password"
-                            onChange={handleInput}
+                            onChange={passInput}
                             id="password"
                             placeholder="password" />
+                         {passErrors?  <span style={{color: "red", fontSize: "20px"}}>Password is not Valid</span> : ""}
                     </div>
                 </div>
 

@@ -135,16 +135,15 @@ const UpdateBasicDetails=()=>{
                             placeholder="password" />
 
                     </div>
-                    <div className="col-6 sm-4">
+                    <div className="col-sm-4">
                     <label for="formGroupExampleInput" class="form-label">Birth Date </label>
-                        <input type=""
-                            className="form-control"
-                            name="birth_Date"
-                            onChange={handleInput}
-                            value={agentdata?.birthdate}
-                            id="birth_Date"
-                            placeholder="date of birth" />
-                    </div>
+                    <input type="Date" 
+                        className="form-control" 
+                        id="birth_Date" 
+                        onChange={handleInput}
+                        name='birth_Date'
+                        placeholder="birth_Date.." />
+                 </div>
                 </div>
                 <div className="mb-4 row">
                     <div className="col-6 sm-4">

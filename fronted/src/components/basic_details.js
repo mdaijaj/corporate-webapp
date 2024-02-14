@@ -117,15 +117,15 @@ const BasicDetails=()=>{
                             id="password"
                             placeholder="password" />
                     </div>
-                    <div className="col-6 sm-4">
+                    <div className="col-sm-4">
                     <label for="formGroupExampleInput" class="form-label">Birth Date </label>
-                        <input type=""
-                            className="form-control"
-                            name="birth_Date"
-                            onChange={handleInput}
-                            id="birth_Date"
-                            placeholder="date of birth" />
-                    </div>
+                    <input type="Date" 
+                        className="form-control" 
+                        id="birth_Date" 
+                        onChange={handleInput}
+                        name='birth_Date'
+                        placeholder="birth_Date.." />
+                 </div>
                     <div className="col-6 sm-4">
                         <label for="formGroupExampleInput" class="form-label">Role Select *</label>
                         <select className="form-control" id="inputGroupSelect01" onChange={handleInput} name="role_name" aria-label="select example">
