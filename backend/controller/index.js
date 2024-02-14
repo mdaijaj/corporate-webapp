@@ -52,7 +52,7 @@ exports.signin= async (req,res)=>{
       let agent_detail =await UserDetail.findOne({email: email})
       console.log("agent_detail", agent_detail)
       if(agent_detail){
-          const isMatch=await Bcrypt.compare(password, agent_detail.password);
+          const isMatch=await Bcrypt.compare(password.password, agent_detail.password);
           if(!isMatch){
               return res.status(400).send({error: "Invalid Credentials", data: null})
           }

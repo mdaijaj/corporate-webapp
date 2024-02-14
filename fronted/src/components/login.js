@@ -41,12 +41,6 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
 
-        const {
-            email,
-            password
-        } = userdata;
-
-
         if(userdata.length<3 || passdata.length<3){
             toast.success('please correct username or password', { autoClose: 1000 })
         }
@@ -58,8 +52,8 @@ const Login = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                email,
-                password
+                email: userdata,
+                password: passdata
             })
         }
         const res = await fetch(`/api/signin`, regInf);
